@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "billikenmod:item/billiken_block"
+  }
+}

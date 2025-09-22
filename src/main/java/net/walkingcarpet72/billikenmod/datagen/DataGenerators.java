@@ -1,0 +1,31 @@
+package net.walkingcarpet72.billikenmod.datagen;
+
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.walkingcarpet72.billikenmod.BillikenMod;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
+
+
+
+
+import java.util.concurrent.CompletableFuture;
+
+@Mod(BillikenMod.MOD_ID)
+public class DataGenerators {
+
+  @SubscribeEvent
+  public static void gatherData(GatherDataEvent event) {
+      DataGenerator generator = event.getGenerator();
+      PackOutput packOutput = generator.getPackOutput();
+      ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+      CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+
+
+      generator.addProvider(event.includeServer(), new ModDatapackEntries(packOutput, lookupProvider));
+  }
+
+}

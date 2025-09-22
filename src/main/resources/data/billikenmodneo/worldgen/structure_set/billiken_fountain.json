@@ -1,0 +1,20 @@
+{
+
+  "structures": [
+    {
+      "structure": "billikenmod:billiken_fountain",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+
+    "salt": 56759806,
+
+    "spacing": 12,
+
+    "separation": 4
+  }
+}
