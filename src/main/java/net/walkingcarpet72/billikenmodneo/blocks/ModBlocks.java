@@ -1,8 +1,5 @@
-package net.walkingcarpet72.billikenmod.blocks;
+package net.walkingcarpet72.billikenmodneo.blocks;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -11,9 +8,9 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.walkingcarpet72.billikenmod.BillikenMod;
-import net.walkingcarpet72.billikenmod.blocks.custom.BillikenBlock;
-import net.walkingcarpet72.billikenmod.item.ModItems;
+import net.walkingcarpet72.billikenmodneo.BillikenMod;
+import net.walkingcarpet72.billikenmodneo.blocks.custom.BillikenBlock;
+import net.walkingcarpet72.billikenmodneo.item.ModItems;
 
 import java.util.function.Supplier;
 

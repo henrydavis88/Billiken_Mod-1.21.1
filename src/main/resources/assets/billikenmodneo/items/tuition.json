@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "billikenmod:item/tuition"
+    "model": "billikenmodneo:item/tuition"
   }
 }

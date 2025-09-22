@@ -1,11 +1,11 @@
 {
-  "item.billikenmod.tuition": "Tuition",
+  "item.billikenmodneo.tuition": "Tuition",
 
-  "item.billikenmod.tuition_block": "Block of Tuition",
-  "block.billikenmod.tuition_block": "Block of Tuition",
+  "item.billikenmodneo.tuition_block": "Block of Tuition",
+  "block.billikenmodneo.tuition_block": "Block of Tuition",
 
-  "item.billikenmod.billiken_block": "Block of The Billiken",
-  "block.billikenmod.billiken_block": "Block of The Billiken",
+  "item.billikenmodneo.billiken_block": "Block of The Billiken",
+  "block.billikenmodneo.billiken_block": "Block of The Billiken",
 
-  "enchantment.billikenmod.billiken_bounty": "Billiken Bounty Enchantment"
+  "enchantment.billikenmodneo.billiken_bounty": "Billiken Bounty Enchantment"
 }

@@ -1,17 +1,15 @@
-package net.walkingcarpet72.billikenmod.events;
+package net.walkingcarpet72.billikenmodneo.events;
 
 
 import net.neoforged.bus.api.SubscribeEvent;
 
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.walkingcarpet72.billikenmod.BillikenMod;
-import net.walkingcarpet72.billikenmod.entity.ModEntities;
-import net.walkingcarpet72.billikenmod.entity.client.BillikenAnimations;
-import net.walkingcarpet72.billikenmod.entity.client.BillikenModel;
-import net.walkingcarpet72.billikenmod.entity.custom.BillikenEntity;
+import net.walkingcarpet72.billikenmodneo.BillikenMod;
+import net.walkingcarpet72.billikenmodneo.entity.ModEntities;
+import net.walkingcarpet72.billikenmodneo.entity.client.BillikenModel;
+import net.walkingcarpet72.billikenmodneo.entity.custom.BillikenEntity;
 
 @EventBusSubscriber(modid = BillikenMod.MOD_ID)
 public class ModEventBusEvents {

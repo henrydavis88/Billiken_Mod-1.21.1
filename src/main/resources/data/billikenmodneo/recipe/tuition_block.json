@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "billikenmod:tuition",
+    "A": "billikenmodneo:tuition",
     "B": "minecraft:diamond_block"
   },
   "pattern": [
@@ -12,6 +12,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "billikenmod:tuition_block"
+    "id": "billikenmodneo:tuition_block"
   }
 }

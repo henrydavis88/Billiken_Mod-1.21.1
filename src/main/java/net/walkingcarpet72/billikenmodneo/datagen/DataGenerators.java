@@ -1,10 +1,10 @@
-package net.walkingcarpet72.billikenmod.datagen;
+package net.walkingcarpet72.billikenmodneo.datagen;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import net.walkingcarpet72.billikenmod.BillikenMod;
+import net.walkingcarpet72.billikenmodneo.BillikenMod;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;

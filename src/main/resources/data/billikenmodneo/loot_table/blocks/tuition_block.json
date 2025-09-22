@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "billikenmod:tuition_block"
+          "name": "billikenmodneo:tuition_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "billikenmod:blocks/tuition_block"
+  "random_sequence": "billikenmodneo:blocks/tuition_block"
 }

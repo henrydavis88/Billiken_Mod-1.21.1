@@ -1,11 +1,11 @@
-package net.walkingcarpet72.billikenmod;
+package net.walkingcarpet72.billikenmodneo;
 
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.walkingcarpet72.billikenmod.entity.client.BillikenRenderer;
+import net.walkingcarpet72.billikenmodneo.entity.client.BillikenRenderer;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -20,10 +20,10 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
-import net.walkingcarpet72.billikenmod.item.ModItems;
-import net.walkingcarpet72.billikenmod.blocks.ModBlocks;
-import net.walkingcarpet72.billikenmod.entity.ModEntities;
-import net.walkingcarpet72.billikenmod.enchantment.ModEnchantmentEffects;
+import net.walkingcarpet72.billikenmodneo.item.ModItems;
+import net.walkingcarpet72.billikenmodneo.blocks.ModBlocks;
+import net.walkingcarpet72.billikenmodneo.entity.ModEntities;
+import net.walkingcarpet72.billikenmodneo.enchantment.ModEnchantmentEffects;
 
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file

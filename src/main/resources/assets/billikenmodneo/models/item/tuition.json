@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "billikenmod:item/tuition"
+    "layer0": "billikenmodneo:item/tuition"
   }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "billikenmod:block/tuition_block"
+      "model": "billikenmodneo:block/tuition_block"
     }
   }
 }

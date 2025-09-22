@@ -1,17 +1,13 @@
-package net.walkingcarpet72.billikenmod.entity;
+package net.walkingcarpet72.billikenmodneo.entity;
 
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.walkingcarpet72.billikenmod.BillikenMod;
-import net.walkingcarpet72.billikenmod.entity.custom.BillikenEntity;
+import net.walkingcarpet72.billikenmodneo.BillikenMod;
+import net.walkingcarpet72.billikenmodneo.entity.custom.BillikenEntity;
 
 import java.util.function.Supplier;
 

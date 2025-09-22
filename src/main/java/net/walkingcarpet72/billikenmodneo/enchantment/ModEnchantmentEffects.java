@@ -1,12 +1,12 @@
-package net.walkingcarpet72.billikenmod.enchantment;
+package net.walkingcarpet72.billikenmodneo.enchantment;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.enchantment.effects.EnchantmentLocationBasedEffect;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.walkingcarpet72.billikenmod.BillikenMod;
-import net.walkingcarpet72.billikenmod.enchantment.custom.BillikenBountyEnchantmentEffect;
+import net.walkingcarpet72.billikenmodneo.BillikenMod;
+import net.walkingcarpet72.billikenmodneo.enchantment.custom.BillikenBountyEnchantmentEffect;
 
 import java.util.function.Supplier;
 

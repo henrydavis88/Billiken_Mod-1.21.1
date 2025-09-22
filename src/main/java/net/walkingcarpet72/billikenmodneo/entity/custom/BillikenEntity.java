@@ -1,10 +1,10 @@
-package net.walkingcarpet72.billikenmod.entity.custom;
+package net.walkingcarpet72.billikenmodneo.entity.custom;
 
 import com.mojang.logging.LogUtils;
 
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
@@ -19,21 +19,18 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import net.walkingcarpet72.billikenmod.Config;
-import net.walkingcarpet72.billikenmod.blocks.ModBlocks;
-import net.walkingcarpet72.billikenmod.item.ModItems;
+import net.walkingcarpet72.billikenmodneo.Config;
+import net.walkingcarpet72.billikenmodneo.blocks.ModBlocks;
+import net.walkingcarpet72.billikenmodneo.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.List;
 
-import static net.walkingcarpet72.billikenmod.enchantment.ModEnchantments.BILLIKEN_BOUNTY;
-
+import static net.walkingcarpet72.billikenmodneo.enchantment.ModEnchantments.BILLIKEN_BOUNTY;
 
 
 public class BillikenEntity extends Animal {
@@ -145,7 +142,7 @@ public class BillikenEntity extends Animal {
             }
         }
         if (pStack.is(ItemTags.MINING_ENCHANTABLE) || pStack.is(ItemTags.WEAPON_ENCHANTABLE)) {
-                int currentItemLevel = EnchantmentHelper.getItemEnchantmentLevel(BILLIKEN_BOUNTY, pStack);
+                /*int currentItemLevel = EnchantmentHelper.getItemEnchantmentLevel(RegistryAccess.fromRegistryOfRegistries(BILLIKEN_BOUNTY), pStack);
 
                 BuiltInRegistries.ITEM.getHolder(ResourceLocation.parse("billikenmodneo:billiken_block"));
 
@@ -165,6 +162,8 @@ public class BillikenEntity extends Animal {
                     billikenInteractionCooldown =  Config.billikenTradeReset * 20;
                     return InteractionResult.SUCCESS;
                 }
+
+*/
         }
         return super.mobInteract(player, hand);
     }

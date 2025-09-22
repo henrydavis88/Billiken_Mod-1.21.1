@@ -1,9 +1,8 @@
-package net.walkingcarpet72.billikenmod.entity.client;
+package net.walkingcarpet72.billikenmodneo.entity.client;
 
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -13,8 +12,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.walkingcarpet72.billikenmod.BillikenMod;
-import net.walkingcarpet72.billikenmod.entity.custom.BillikenEntity;
+import net.walkingcarpet72.billikenmodneo.BillikenMod;
+import net.walkingcarpet72.billikenmodneo.entity.custom.BillikenEntity;
 
 
 @OnlyIn(Dist.CLIENT)

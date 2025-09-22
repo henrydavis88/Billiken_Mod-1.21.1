@@ -1,4 +1,4 @@
-package net.walkingcarpet72.billikenmod.item;
+package net.walkingcarpet72.billikenmodneo.item;
 
 
 
@@ -7,9 +7,7 @@ import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.walkingcarpet72.billikenmod.BillikenMod;
-
-import java.util.function.Supplier;
+import net.walkingcarpet72.billikenmodneo.BillikenMod;
 
 public class ModItems {
 

@@ -1,11 +1,10 @@
-package net.walkingcarpet72.billikenmod.blocks.custom;
+package net.walkingcarpet72.billikenmodneo.blocks.custom;
 
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
-import net.walkingcarpet72.billikenmod.Config;
-import net.walkingcarpet72.billikenmod.blocks.ModBlocks;
-import net.walkingcarpet72.billikenmod.entity.ModEntities;
-import net.walkingcarpet72.billikenmod.entity.custom.BillikenEntity;
+import net.walkingcarpet72.billikenmodneo.Config;
+import net.walkingcarpet72.billikenmodneo.blocks.ModBlocks;
+import net.walkingcarpet72.billikenmodneo.entity.ModEntities;
+import net.walkingcarpet72.billikenmodneo.entity.custom.BillikenEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

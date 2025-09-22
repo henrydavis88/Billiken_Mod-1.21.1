@@ -1,4 +1,4 @@
-package net.walkingcarpet72.billikenmod.entity.client;
+package net.walkingcarpet72.billikenmodneo.entity.client;
 
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;

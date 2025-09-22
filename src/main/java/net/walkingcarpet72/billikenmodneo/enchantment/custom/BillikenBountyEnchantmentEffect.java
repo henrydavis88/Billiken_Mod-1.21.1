@@ -1,4 +1,4 @@
-package net.walkingcarpet72.billikenmod.enchantment.custom;
+package net.walkingcarpet72.billikenmodneo.enchantment.custom;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.server.level.ServerLevel;

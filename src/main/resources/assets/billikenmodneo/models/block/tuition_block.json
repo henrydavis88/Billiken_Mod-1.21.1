@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "billikenmod:block/tuition_block"
+    "all": "billikenmodneo:block/tuition_block"
   }
 }

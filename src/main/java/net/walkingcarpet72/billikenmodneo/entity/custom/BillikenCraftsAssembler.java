@@ -1,4 +1,4 @@
-package net.walkingcarpet72.billikenmod.entity.custom;
+package net.walkingcarpet72.billikenmodneo.entity.custom;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -12,8 +12,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import net.walkingcarpet72.billikenmod.BillikenMod;
+import net.walkingcarpet72.billikenmodneo.BillikenMod;
 import org.slf4j.Logger;
 
 import java.io.FileNotFoundException;
@@ -77,7 +76,7 @@ public class BillikenCraftsAssembler {
 
         String path = BillikenCraftsAssembler.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
-        path = path + "resources\\data\\billikenmod\\billiken_crafting\\billiken_crafts.json";
+        path = path + "resources\\data\\billikenmodneo\\billiken_crafting\\billiken_crafts.json";
         String sep = "\\";
         path = path.replace("build/","");
         path = path.replaceAll("/", Matcher.quoteReplacement(sep));

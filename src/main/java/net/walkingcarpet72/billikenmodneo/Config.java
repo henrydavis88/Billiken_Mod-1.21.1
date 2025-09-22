@@ -1,4 +1,4 @@
-package net.walkingcarpet72.billikenmod;
+package net.walkingcarpet72.billikenmodneo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
-import net.walkingcarpet72.billikenmod.entity.custom.BillikenCrafting;
+import net.walkingcarpet72.billikenmodneo.entity.custom.BillikenCrafting;
 
 
 // An example config class. This is not required, but it's a good idea to have one to keep your config organized.

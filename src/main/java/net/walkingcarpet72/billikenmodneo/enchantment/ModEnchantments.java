@@ -1,4 +1,4 @@
-package net.walkingcarpet72.billikenmod.enchantment;
+package net.walkingcarpet72.billikenmodneo.enchantment;
 
 
 import net.minecraft.core.registries.Registries;
@@ -10,8 +10,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
-import net.walkingcarpet72.billikenmod.BillikenMod;
-import net.walkingcarpet72.billikenmod.enchantment.custom.BillikenBountyEnchantmentEffect;
+import net.walkingcarpet72.billikenmodneo.BillikenMod;
+import net.walkingcarpet72.billikenmodneo.enchantment.custom.BillikenBountyEnchantmentEffect;
 
 public class ModEnchantments {
 

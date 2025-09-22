@@ -1,4 +1,4 @@
-package net.walkingcarpet72.billikenmod;
+package net.walkingcarpet72.billikenmodneo;
 
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;

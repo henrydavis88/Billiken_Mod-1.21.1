@@ -1,4 +1,4 @@
-package net.walkingcarpet72.billikenmod.datagen;
+package net.walkingcarpet72.billikenmodneo.datagen;
 
 
 import net.minecraft.core.HolderLookup;
@@ -6,8 +6,8 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.walkingcarpet72.billikenmod.BillikenMod;
-import net.walkingcarpet72.billikenmod.enchantment.ModEnchantments;
+import net.walkingcarpet72.billikenmodneo.BillikenMod;
+import net.walkingcarpet72.billikenmodneo.enchantment.ModEnchantments;
 
 
 import java.util.Set;

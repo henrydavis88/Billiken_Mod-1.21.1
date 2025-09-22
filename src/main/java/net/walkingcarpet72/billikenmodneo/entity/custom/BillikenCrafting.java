@@ -1,4 +1,4 @@
-package net.walkingcarpet72.billikenmod.entity.custom;
+package net.walkingcarpet72.billikenmodneo.entity.custom;
 
 import net.minecraft.world.item.Item;
 
