@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "billikenmodneo:tuition",
-    "B": "minecraft:diamond_block"
+    "A": {
+      "item": "billikenmodneo:tuition"
+    },
+    "B": {
+      "item": "minecraft:diamond_block"
+    }
   },
   "pattern": [
     "AAA",

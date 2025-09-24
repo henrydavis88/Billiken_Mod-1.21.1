@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.logging.LogUtils;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -13,6 +15,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.walkingcarpet72.billikenmodneo.BillikenMod;
+import net.walkingcarpet72.billikenmodneo.recipe.BillikenRecipe;
 import org.slf4j.Logger;
 
 import java.io.FileNotFoundException;
@@ -20,6 +23,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
+
+import static net.walkingcarpet72.billikenmodneo.recipe.BillikenRecipe.BILLIKEN_RECIPE_CODEC;
 
 
 @Mod(BillikenMod.MOD_ID)
@@ -30,7 +35,7 @@ public class BillikenCraftsAssembler {
     public BillikenCraftsAssembler() {
         LOGGER.atInfo().log("starting assembly");
         final IEventBus forgeBus = NeoForge.EVENT_BUS;
-        forgeBus.addListener(this::jsonReader);
+        //forgeBus.addListener(this::jsonReader);
 
     }
 
@@ -39,17 +44,35 @@ public class BillikenCraftsAssembler {
     public static List<BillikenCrafting> recipes = new ArrayList<>();
 
 
-
+    /*
     private void jsonReader (AddReloadListenerEvent event) {
         LOGGER.atInfo().log("starting to read");
+
+        ResourceLocation location = ResourceLocation.fromNamespaceAndPath("billikenmodneo","billiken_crafting/billiken_crafts.json");
+
+        LOGGER.atInfo().log("Resource Location: ");
+        LOGGER.atInfo().log(String.valueOf(location));
 
 
         Gson gson = new Gson();
         JsonObject craftingRecipesFile = null;
 
+
+
         try {
 
-            craftingRecipesFile = gson.fromJson(new FileReader("billikenmodneo:billiken_crafting/billiken_crafts.json"), JsonObject.class);
+            String path = BillikenCraftsAssembler.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+            path = path + "resources\\data\\billikenmodneo\\billiken_crafting\\billiken_crafts.json";
+            String sep = "\\";
+            path = path.replace("build/","");
+            path = path.replaceAll("/", Matcher.quoteReplacement(sep));
+            path = path.replaceAll("sourcesSets", "src");
+
+            LOGGER.atInfo().log("Path");
+            LOGGER.atInfo().log(path);
+
+            craftingRecipesFile = gson.fromJson(new FileReader(location.getPath()), JsonObject.class);
+
             JsonArray recipeList = craftingRecipesFile.get("recipes").getAsJsonArray();
             for (int i = 0; i < recipeList.size(); i++) {
                 JsonObject currentRecipe = recipeList.get(i).getAsJsonObject();
@@ -68,13 +91,18 @@ public class BillikenCraftsAssembler {
             throw new RuntimeException(e);
         }
     }
+    */
 
     public static List<BillikenCrafting> jsonReaderTwo() {
         LOGGER.atInfo().log("starting to read");
 
         ResourceLocation location = ResourceLocation.fromNamespaceAndPath("billikenmodneo","billiken_crafting/billiken_crafts.json");
 
+        LOGGER.atInfo().log(String.valueOf(location));
+
         String path = BillikenCraftsAssembler.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+
+        LOGGER.atInfo().log(path);
 
         path = path + "resources\\data\\billikenmodneo\\billiken_crafting\\billiken_crafts.json";
         String sep = "\\";
@@ -91,7 +119,7 @@ public class BillikenCraftsAssembler {
         recipes.clear();
 
         try {
-            craftingRecipesFile = gson.fromJson(new FileReader(path), JsonObject.class);
+            craftingRecipesFile = gson.fromJson(new FileReader(location.getPath()), JsonObject.class);
             JsonArray recipeList = craftingRecipesFile.get("recipes").getAsJsonArray();
             for (int i = 0; i < recipeList.size(); i++) {
                 JsonObject currentRecipe = recipeList.get(i).getAsJsonObject();
@@ -110,7 +138,24 @@ public class BillikenCraftsAssembler {
         }
 
 
+
+
     }
+
+    public static List<BillikenCrafting> jsonReaderThree() {
+        //get json file location
+        //get Codec
+
+        List<BillikenCrafting> billikenRecipes = new ArrayList<>();
+
+        DataResult<BillikenRecipe> result = BILLIKEN_RECIPE_CODEC.parse(JsonOps.INSTANCE, billiken_crafts.json);
+
+        billikenRecipes = result.ifSuccess(decodedObject -> BillikenCrafting::new());
+
+        return billikenRecipes;
+    }
+
+
 
 
 }

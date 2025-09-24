@@ -25,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.walkingcarpet72.billikenmodneo.Config;
 import net.walkingcarpet72.billikenmodneo.blocks.ModBlocks;
 import net.walkingcarpet72.billikenmodneo.item.ModItems;
+import net.walkingcarpet72.billikenmodneo.recipe.BillikenRecipe;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
@@ -167,6 +168,8 @@ public class BillikenEntity extends Animal {
         }
         return super.mobInteract(player, hand);
     }
+
+
 
 
 }

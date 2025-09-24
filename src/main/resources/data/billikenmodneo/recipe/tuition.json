@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "minecraft:emerald",
-    "B": "minecraft:paper"
+    "A": {
+        "item": "minecraft:paper"
+    },
+    "B": {
+      "item": "minecraft:emerald"
+    }
   },
   "pattern": [
     "AAA",

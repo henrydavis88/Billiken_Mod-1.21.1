@@ -20,7 +20,7 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(BillikenMod.MOD_ID);
 
-    public static final DeferredBlock<Block> TUITION_BLOCK = BLOCKS.register("tuition_block",
+    public static final DeferredBlock<Block> TUITION_BLOCK = registerBlock("tuition_block",
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(0.5f).sound(SoundType.CROP)));
 
