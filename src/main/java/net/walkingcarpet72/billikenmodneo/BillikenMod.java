@@ -1,11 +1,16 @@
 package net.walkingcarpet72.billikenmodneo;
 
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.walkingcarpet72.billikenmodneo.entity.client.BillikenRenderer;
+import net.walkingcarpet72.billikenmodneo.recipe.BillikenRecipe;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -87,6 +92,23 @@ public class BillikenMod {
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = BillikenMod.MOD_ID, value = Dist.CLIENT)
     public static class ClientModEvents {
+
+        public static final ResourceKey<Registry<BillikenRecipe>> BILLIKEN_RECIPE_REGISTRY =
+                ResourceKey.createRegistryKey(
+                        ResourceLocation.fromNamespaceAndPath(BillikenMod.MOD_ID,"billiken_recipe")
+                        );
+
+        @SubscribeEvent
+        public static void addRegistries(DataPackRegistryEvent.NewRegistry event) {
+            event.dataPackRegistry(
+                    BILLIKEN_RECIPE_REGISTRY,
+                    BillikenRecipe.BILLIKEN_RECIPE_CODEC,
+                    BillikenRecipe.BILLIKEN_RECIPE_CODEC,
+                    builder -> builder.maxId(256)
+
+            );
+        }
+
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(ModEntities.BILLIKEN.get(), BillikenRenderer::new);

@@ -11,11 +11,10 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.walkingcarpet72.billikenmodneo.BillikenMod;
 import net.walkingcarpet72.billikenmodneo.entity.custom.BillikenEntity;
 
-@OnlyIn(Dist.CLIENT)
 public class BillikenRenderer extends MobRenderer<BillikenEntity, BillikenModel<BillikenEntity>> {
 
     public BillikenRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new BillikenModel(pContext.bakeLayer(BillikenModel.LAYER_LOCATION)),0.85f);
+        super(pContext, new BillikenModel<>(pContext.bakeLayer(BillikenModel.LAYER_LOCATION)),0.85f);
     }
 
     @Override

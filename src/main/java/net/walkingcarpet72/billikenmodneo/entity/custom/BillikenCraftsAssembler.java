@@ -6,10 +6,12 @@ import com.google.gson.JsonObject;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
+import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
@@ -26,7 +28,7 @@ import java.util.regex.Matcher;
 
 import static net.walkingcarpet72.billikenmodneo.recipe.BillikenRecipe.BILLIKEN_RECIPE_CODEC;
 
-
+/*
 @Mod(BillikenMod.MOD_ID)
 public class BillikenCraftsAssembler {
 
@@ -92,7 +94,7 @@ public class BillikenCraftsAssembler {
         }
     }
     */
-
+    /*
     public static List<BillikenCrafting> jsonReaderTwo() {
         LOGGER.atInfo().log("starting to read");
 
@@ -140,22 +142,33 @@ public class BillikenCraftsAssembler {
 
 
 
-    }
+    }*/
 
-    public static List<BillikenCrafting> jsonReaderThree() {
+ /*   public static List<BillikenCrafting> jsonReaderThree() {
         //get json file location
         //get Codec
+        Item startingItem;
+        Item endingItem;
+        Integer amount;
+        Integer levels;
 
-        List<BillikenCrafting> billikenRecipes = new ArrayList<>();
 
-        DataResult<BillikenRecipe> result = BILLIKEN_RECIPE_CODEC.parse(JsonOps.INSTANCE, billiken_crafts.json);
 
-        billikenRecipes = result.ifSuccess(decodedObject -> BillikenCrafting::new());
 
-        return billikenRecipes;
+        for(BillikenRecipe recipe : billikenRegistry) {
+            startingItem = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(recipe.startingItem()));
+            endingItem = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(recipe.endingItem()));
+            amount = recipe.amount();
+            levels = recipe.levels();
+            recipes.add(new BillikenCrafting(startingItem, endingItem, amount, levels));
+        }
+
+        return recipes;
     }
 
 
-
+/*
 
 }
+
+  */

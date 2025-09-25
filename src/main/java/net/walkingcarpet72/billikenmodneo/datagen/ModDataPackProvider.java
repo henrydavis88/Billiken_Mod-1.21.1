@@ -13,11 +13,12 @@ import net.walkingcarpet72.billikenmodneo.enchantment.ModEnchantments;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public class ModDatapackEntries extends DatapackBuiltinEntriesProvider {
+public class ModDataPackProvider extends DatapackBuiltinEntriesProvider {
 
-    public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder().add(Registries.ENCHANTMENT, ModEnchantments::bootstrap);
+    public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+            .add(Registries.ENCHANTMENT, ModEnchantments::bootstrap);
 
-    public ModDatapackEntries(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    public ModDataPackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(BillikenMod.MOD_ID));
     }
 }

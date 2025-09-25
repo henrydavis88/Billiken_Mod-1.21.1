@@ -2,6 +2,7 @@ package net.walkingcarpet72.billikenmodneo.entity.custom;
 
 import com.mojang.logging.LogUtils;
 
+import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,20 +19,23 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 
+import net.walkingcarpet72.billikenmodneo.BillikenMod;
 import net.walkingcarpet72.billikenmodneo.Config;
 import net.walkingcarpet72.billikenmodneo.blocks.ModBlocks;
+import net.walkingcarpet72.billikenmodneo.enchantment.ModEnchantments;
 import net.walkingcarpet72.billikenmodneo.item.ModItems;
 import net.walkingcarpet72.billikenmodneo.recipe.BillikenRecipe;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static net.walkingcarpet72.billikenmodneo.enchantment.ModEnchantments.BILLIKEN_BOUNTY;
 
 
 public class BillikenEntity extends Animal {
@@ -109,16 +113,32 @@ public class BillikenEntity extends Animal {
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
 
-        List<BillikenCrafting> recipesFinal = BillikenCraftsAssembler.jsonReaderTwo();
         ItemStack pStack = player.getItemInHand(hand);
+
+        Item startingItem;
+        Item endingItem;
+        Integer amount;
+        Integer levels;
+
+        List<BillikenCrafting> recipes = new ArrayList<>();
+
+        Registry<BillikenRecipe> billikenRegistry = player.level().registryAccess().registryOrThrow(BillikenMod.ClientModEvents.BILLIKEN_RECIPE_REGISTRY);
+
+        for(BillikenRecipe recipe : billikenRegistry) {
+            startingItem = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(recipe.startingItem()));
+            endingItem = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(recipe.endingItem()));
+            amount = recipe.amount();
+            levels = recipe.levels();
+            recipes.add(new BillikenCrafting(startingItem, endingItem, amount, levels));
+        }
 
 
         if (pStack.is(ModBlocks.TUITION_BLOCK.get().asItem())) {
             pStack.consume(1, player);
-            billikenInteractionCooldown -= Config.tuitionBlockReset * 20;
+            billikenInteractionCooldown -= Config.BLOCK_TUITION_RESET_AMOUNT.getAsInt() * 20;
             return InteractionResult.SUCCESS;
         } else if (pStack.is(ModItems.TUITION.get())) {
-            billikenInteractionCooldown -= Config.tuitionTradeReset * 20;
+            billikenInteractionCooldown -= Config.TUITION_RESET_AMOUNT.getAsInt() * 20;
             if (billikenInteractionCooldown <= 0) {
                 billikenInteractionCooldown = 0;
                 pStack.consume(1, player);
@@ -130,41 +150,43 @@ public class BillikenEntity extends Animal {
             return super.mobInteract(player, hand);
         }
 
-        for (int i = 0; i < recipesFinal.size(); i++) {
+        for (int i = 0; i < recipes.size(); i++) {
 
-            if (pStack.is(recipesFinal.get(i).startingItem) && player.experienceLevel >= recipesFinal.get(i).levelsRequired) {
+            if (pStack.is(recipes.get(i).startingItem) && player.experienceLevel >= recipes.get(i).levelsRequired) {
                 pStack.consume(1, player);
-                for (int j = 1; j <= recipesFinal.get(i).itemCount; j++) {
-                    player.addItem(recipesFinal.get(i).endResult.getDefaultInstance());
+                for (int j = 1; j <= recipes.get(i).itemCount; j++) {
+                    player.addItem(recipes.get(i).endResult.getDefaultInstance());
                 }
-                player.experienceLevel -= recipesFinal.get(i).levelsRequired;
-                billikenInteractionCooldown = Config.billikenTradeReset * 20;
+                player.experienceLevel -= recipes.get(i).levelsRequired;
+                billikenInteractionCooldown = Config.BILLIKEN_TRADE_RESET.getAsInt() * 20;
                 return InteractionResult.SUCCESS;
             }
         }
+
         if (pStack.is(ItemTags.MINING_ENCHANTABLE) || pStack.is(ItemTags.WEAPON_ENCHANTABLE)) {
-                /*int currentItemLevel = EnchantmentHelper.getItemEnchantmentLevel(RegistryAccess.fromRegistryOfRegistries(BILLIKEN_BOUNTY), pStack);
+
+                int currentItemLevel = EnchantmentHelper.getItemEnchantmentLevel(player.level().registryAccess().holderOrThrow(ModEnchantments.BILLIKEN_BOUNTY), pStack);
 
                 BuiltInRegistries.ITEM.getHolder(ResourceLocation.parse("billikenmodneo:billiken_block"));
 
-                if (currentItemLevel == 0 && player.experienceLevel >= Config.firstLevel) {
-                    pStack.enchant(BILLIKEN_BOUNTY.getOrThrow(player), 1);
-                    player.experienceLevel -= Config.firstLevel;
-                    billikenInteractionCooldown =  Config.billikenTradeReset * 20;
+                if (currentItemLevel == 0 && player.experienceLevel >= Config.LEVELS_FOR_FIRST.getAsInt()) {
+                    pStack.enchant(player.level().registryAccess().holderOrThrow(ModEnchantments.BILLIKEN_BOUNTY), 1);
+                    player.experienceLevel -= Config.LEVELS_FOR_FIRST.getAsInt();
+                    billikenInteractionCooldown =  Config.BILLIKEN_TRADE_RESET.getAsInt() * 20;
                     return InteractionResult.SUCCESS;
-                } else if (currentItemLevel == 1 && player.experienceLevel >= Config.secondLevel) {
-                    pStack.enchant(BILLIKEN_BOUNTY.getOrThrow(player), 2);
-                    player.experienceLevel -= Config.secondLevel;
-                    billikenInteractionCooldown =  Config.billikenTradeReset * 20;
+                } else if (currentItemLevel == 1 && player.experienceLevel >= Config.LEVELS_FOR_SECOND.getAsInt()) {
+                    pStack.enchant(player.level().registryAccess().holderOrThrow(ModEnchantments.BILLIKEN_BOUNTY), 2);
+                    player.experienceLevel -= Config.LEVELS_FOR_SECOND.getAsInt();
+                    billikenInteractionCooldown =  Config.BILLIKEN_TRADE_RESET.getAsInt() * 20;
                     return InteractionResult.SUCCESS;
-                } else if (currentItemLevel == 2 && player.experienceLevel >= Config.thirdLevel) {
-                    pStack.enchant(BILLIKEN_BOUNTY.getOrThrow(player), 3);
-                    player.experienceLevel -= Config.thirdLevel;
-                    billikenInteractionCooldown =  Config.billikenTradeReset * 20;
+                } else if (currentItemLevel == 2 && player.experienceLevel >= Config.LEVELS_FOR_THIRD.getAsInt()) {
+                    pStack.enchant(player.level().registryAccess().holderOrThrow(ModEnchantments.BILLIKEN_BOUNTY), 3);
+                    player.experienceLevel -= Config.LEVELS_FOR_THIRD.getAsInt();
+                    billikenInteractionCooldown =  Config.BILLIKEN_TRADE_RESET.getAsInt() * 20;
                     return InteractionResult.SUCCESS;
                 }
 
-*/
+
         }
         return super.mobInteract(player, hand);
     }

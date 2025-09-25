@@ -48,7 +48,7 @@ public class BillikenBlock extends Block {
 
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        if (Config.billikenKills) {
+        if (Config.BILLIKEN_BLOCK_BREAK_KILLS.getAsBoolean()) {
             player.setHealth(0);
         }
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
