@@ -1,0 +1,118 @@
+{
+  "recipes": [
+    {
+      "starting_item": "minecraft:golden_apple",
+      "ending_item": "minecraft:enchanted_golden_apple",
+      "amount": 1,
+      "levels": 10
+    },
+    {
+      "starting_item": "minecraft:diamond_ore",
+      "ending_item": "minecraft:diamond_block",
+      "amount": 1,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:deepslate_diamond_ore",
+      "ending_item": "minecraft:diamond_block",
+      "amount": 1,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:iron_ore",
+      "ending_item": "minecraft:iron_block",
+      "amount": 2,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:deepslate_iron_ore",
+      "ending_item": "minecraft:iron_block",
+      "amount": 3,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:gold_ore",
+      "ending_item": "minecraft:gold_block",
+      "amount": 2,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:deepslate_gold_ore",
+      "ending_item": "minecraft:gold_block",
+      "amount": 2,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:nether_gold_ore",
+      "ending_item": "minecraft:gold_block",
+      "amount": 2,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:nether_quartz_ore",
+      "ending_item": "minecraft:quartz_block",
+      "amount": 3,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:redstone_ore",
+      "ending_item": "minecraft:redstone_block",
+      "amount": 3,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:deepslate_redstone_ore",
+      "ending_item": "minecraft:gold_block",
+      "amount": 3,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:lapis_ore",
+      "ending_item": "minecraft:lapis_block",
+      "amount": 3,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:deepslate_lapis_ore",
+      "ending_item": "minecraft:lapis_block",
+      "amount": 3,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:coal_ore",
+      "ending_item": "minecraft:coal_block",
+      "amount": 3,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:deepslate_coal_ore",
+      "ending_item": "minecraft:coal_block",
+      "amount": 3,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:emerald_ore",
+      "ending_item": "minecraft:emerald_block",
+      "amount": 2,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:deepslate_emerald_ore",
+      "ending_item": "minecraft:emerald_block",
+      "amount": 2,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:copper_ore",
+      "ending_item": "minecraft:copper_block",
+      "amount": 3,
+      "levels": 5
+    },
+    {
+      "starting_item": "minecraft:deepslate_copper_ore",
+      "ending_item": "minecraft:copper_block",
+      "amount": 3,
+      "levels": 5
+    }
+  ]
+}

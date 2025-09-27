@@ -3,9 +3,12 @@ package net.walkingcarpet72.billikenmodneo.entity.custom;
 import com.mojang.logging.LogUtils;
 
 import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
@@ -29,13 +32,12 @@ import net.walkingcarpet72.billikenmodneo.Config;
 import net.walkingcarpet72.billikenmodneo.blocks.ModBlocks;
 import net.walkingcarpet72.billikenmodneo.enchantment.ModEnchantments;
 import net.walkingcarpet72.billikenmodneo.item.ModItems;
+import net.walkingcarpet72.billikenmodneo.recipe.AllBillikenRecipes;
 import net.walkingcarpet72.billikenmodneo.recipe.BillikenRecipe;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 
 
 public class BillikenEntity extends Animal {
@@ -46,12 +48,27 @@ public class BillikenEntity extends Animal {
 
     private static Logger LOGGER = LogUtils.getLogger();
 
+    protected static final EntityDataAccessor<Integer> BILLIKEN_INTERACTION_COOLDOWN = SynchedEntityData.defineId(BillikenEntity.class, EntityDataSerializers.INT);
 
-    private int billikenInteractionCooldown = 0;
+
+
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(BILLIKEN_INTERACTION_COOLDOWN, 0);
+    }
 
     public BillikenEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        //billikenInteractionCooldown = 0;
+        Set<String> curTags = this.getTags();
+        LOGGER.atInfo().log("Hello new billiken");
+        for(String str : curTags) {
+            LOGGER.atInfo().log(str);
+        }
 
+        //this.setData(ModUtils.BILLIKEN_INTERACTION_COOLDOWN, 600);
 
     }
 
@@ -94,24 +111,30 @@ public class BillikenEntity extends Animal {
         }
     }
 
-    @Override
-    public void tick() {
-        super.tick();
 
+    public void aiStep() {
+        super.aiStep();
+        int billikenInteractionCooldown = this.getBillikenInteractionCooldown();
         if(this.level().isClientSide()) {
             this.setupAnimationStates();
             if (billikenInteractionCooldown > 0) {
-                billikenInteractionCooldown -= 1;
+                this.setBillikenInteractionCooldown(billikenInteractionCooldown - 1);
             } else {
                 this.level().addParticle(ParticleTypes.ENCHANT, this.getRandomX((double)0.5F), this.getRandomY(), this.getRandomZ((double)0.5F), (double)0.0F, (double)0.0F, (double)0.0F);
+                this.setBillikenInteractionCooldown(0);
             }
-        }
+            //LOGGER.atInfo().log(String.valueOf(billikenInteractionCooldown));
 
+
+
+        }
+        //this.setData(ModUtils.BILLIKEN_INTERACTION_COOLDOWN, this.getData(ModUtils.BILLIKEN_INTERACTION_COOLDOWN) + 1);
+        //LOGGER.atInfo().log(String.valueOf(this.getData(ModUtils.BILLIKEN_INTERACTION_COOLDOWN)));
     }
 
 
-
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        int billikenInteractionCooldown = this.getBillikenInteractionCooldown();
 
         ItemStack pStack = player.getItemInHand(hand);
 
@@ -122,25 +145,33 @@ public class BillikenEntity extends Animal {
 
         List<BillikenCrafting> recipes = new ArrayList<>();
 
-        Registry<BillikenRecipe> billikenRegistry = player.level().registryAccess().registryOrThrow(BillikenMod.ClientModEvents.BILLIKEN_RECIPE_REGISTRY);
+        Registry<AllBillikenRecipes> allBillikenRecipesRegistry = player.level().registryAccess().registryOrThrow(BillikenMod.ClientModEvents.ALL_BILLIKEN_RECIPE_REGISTRY);
 
-        for(BillikenRecipe recipe : billikenRegistry) {
-            startingItem = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(recipe.startingItem()));
-            endingItem = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(recipe.endingItem()));
-            amount = recipe.amount();
-            levels = recipe.levels();
-            recipes.add(new BillikenCrafting(startingItem, endingItem, amount, levels));
+        for(AllBillikenRecipes allBillikenRecipes : allBillikenRecipesRegistry) {
+            List<BillikenRecipe> billikenRecipes = allBillikenRecipes.recipes();
+            for(BillikenRecipe curRecipe : billikenRecipes) {
+                startingItem = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(curRecipe.startingItem()));
+                endingItem = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(curRecipe.endingItem()));
+                amount = curRecipe.amount();
+                levels = curRecipe.levels();
+                recipes.add(new BillikenCrafting(startingItem, endingItem, amount, levels));
+            }
         }
+
 
 
         if (pStack.is(ModBlocks.TUITION_BLOCK.get().asItem())) {
             pStack.consume(1, player);
-            billikenInteractionCooldown -= Config.BLOCK_TUITION_RESET_AMOUNT.getAsInt() * 20;
+            this.setBillikenInteractionCooldown(billikenInteractionCooldown - Config.BLOCK_TUITION_RESET_AMOUNT.getAsInt() * 20);
+            if (billikenInteractionCooldown <= 0) {
+                this.setBillikenInteractionCooldown(0);
+                pStack.consume(1, player);
+            }
             return InteractionResult.SUCCESS;
         } else if (pStack.is(ModItems.TUITION.get())) {
-            billikenInteractionCooldown -= Config.TUITION_RESET_AMOUNT.getAsInt() * 20;
+            this.setBillikenInteractionCooldown(billikenInteractionCooldown - Config.TUITION_RESET_AMOUNT.getAsInt() * 20);
             if (billikenInteractionCooldown <= 0) {
-                billikenInteractionCooldown = 0;
+                this.setBillikenInteractionCooldown(0);
                 pStack.consume(1, player);
             }
             return InteractionResult.SUCCESS;
@@ -158,38 +189,123 @@ public class BillikenEntity extends Animal {
                     player.addItem(recipes.get(i).endResult.getDefaultInstance());
                 }
                 player.experienceLevel -= recipes.get(i).levelsRequired;
-                billikenInteractionCooldown = Config.BILLIKEN_TRADE_RESET.getAsInt() * 20;
-                return InteractionResult.SUCCESS;
+                this.setBillikenInteractionCooldown(Config.BILLIKEN_TRADE_RESET.getAsInt() * 20);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
         }
 
         if (pStack.is(ItemTags.MINING_ENCHANTABLE) || pStack.is(ItemTags.WEAPON_ENCHANTABLE)) {
-
+                LOGGER.atInfo().log("hello");
                 int currentItemLevel = EnchantmentHelper.getItemEnchantmentLevel(player.level().registryAccess().holderOrThrow(ModEnchantments.BILLIKEN_BOUNTY), pStack);
 
-                BuiltInRegistries.ITEM.getHolder(ResourceLocation.parse("billikenmodneo:billiken_block"));
-
+                LOGGER.atInfo().log(String.valueOf(currentItemLevel));
+                LOGGER.atInfo().log(String.valueOf(Config.LEVELS_FOR_FIRST.getAsInt()));
                 if (currentItemLevel == 0 && player.experienceLevel >= Config.LEVELS_FOR_FIRST.getAsInt()) {
+                    LOGGER.atInfo().log(String.valueOf(Config.LEVELS_FOR_FIRST.getAsInt()));
                     pStack.enchant(player.level().registryAccess().holderOrThrow(ModEnchantments.BILLIKEN_BOUNTY), 1);
                     player.experienceLevel -= Config.LEVELS_FOR_FIRST.getAsInt();
-                    billikenInteractionCooldown =  Config.BILLIKEN_TRADE_RESET.getAsInt() * 20;
-                    return InteractionResult.SUCCESS;
+                    this.setBillikenInteractionCooldown(Config.BILLIKEN_TRADE_RESET.getAsInt() * 20);
+                    return InteractionResult.sidedSuccess(this.level().isClientSide);
                 } else if (currentItemLevel == 1 && player.experienceLevel >= Config.LEVELS_FOR_SECOND.getAsInt()) {
                     pStack.enchant(player.level().registryAccess().holderOrThrow(ModEnchantments.BILLIKEN_BOUNTY), 2);
                     player.experienceLevel -= Config.LEVELS_FOR_SECOND.getAsInt();
-                    billikenInteractionCooldown =  Config.BILLIKEN_TRADE_RESET.getAsInt() * 20;
-                    return InteractionResult.SUCCESS;
+                    this.setBillikenInteractionCooldown(Config.BILLIKEN_TRADE_RESET.getAsInt() * 20);
+                    return InteractionResult.sidedSuccess(this.level().isClientSide);
                 } else if (currentItemLevel == 2 && player.experienceLevel >= Config.LEVELS_FOR_THIRD.getAsInt()) {
                     pStack.enchant(player.level().registryAccess().holderOrThrow(ModEnchantments.BILLIKEN_BOUNTY), 3);
                     player.experienceLevel -= Config.LEVELS_FOR_THIRD.getAsInt();
-                    billikenInteractionCooldown =  Config.BILLIKEN_TRADE_RESET.getAsInt() * 20;
-                    return InteractionResult.SUCCESS;
+                    this.setBillikenInteractionCooldown(Config.BILLIKEN_TRADE_RESET.getAsInt() * 20);
+                    return InteractionResult.sidedSuccess(this.level().isClientSide);
                 }
 
 
         }
         return super.mobInteract(player, hand);
+
+
     }
+
+    /*
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        LOGGER.atInfo().log("Hello3");
+        //this.billikenInteractionCooldown = compound.getInt("BillikenInteractionCooldown");
+        //Set<String> curTags = this.getTags();
+        //for(String str : curTags) {
+        //    LOGGER.atInfo().log(str);
+        //}
+        String bic = String.valueOf(this.getEntityData().get(BILLIKEN_INTERACTION_COOLDOWN));
+        LOGGER.atInfo().log("Billiken Interaction Cooldown Post-Load: " + bic);
+        this.billikenInteractionCooldown = compound.getInt("BillikenInteractionCooldown");
+    }
+
+     */
+
+    /*
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        this.billikenInteractionCooldown = compound.getInt("BillikenInteractionCooldown");
+    }
+
+
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putInt("BillikenInteractionCooldown", this.billikenInteractionCooldown);
+    }
+
+     */
+    /*
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        this.getEntityData().set(BILLIKEN_INTERACTION_COOLDOWN, 0);
+        compound.putInt("BillikenInteractionCooldown", this.billikenInteractionCooldown);
+        String bic = String.valueOf(this.getEntityData().get(BILLIKEN_INTERACTION_COOLDOWN));
+        LOGGER.atInfo().log("Billiken Interaction Cooldown Pre-Load: " + bic);
+        LOGGER.atInfo().log("hello2");
+        Set<String> curTags = this.getTags();
+        for(String str : curTags) {
+            LOGGER.atInfo().log(str);
+        }
+
+        //LOGGER.atInfo().log(compound.getAsString());
+
+
+    }
+
+     */
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        this.setBillikenInteractionCooldown(compound.getInt("BillikenInteractionCooldown"));
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putInt("BillikenInteractionCooldown", this.getBillikenInteractionCooldown());
+    }
+
+
+    private void setBillikenInteractionCooldown(int coolDown) {
+        this.entityData.set(BILLIKEN_INTERACTION_COOLDOWN, coolDown);
+    }
+
+    public int getBillikenInteractionCooldown() {
+        return this.entityData.get(BILLIKEN_INTERACTION_COOLDOWN);
+    }
+
+
+
+
+
 
 
 

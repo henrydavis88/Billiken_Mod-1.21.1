@@ -28,33 +28,35 @@ public class Config {
 
 
     public static final ModConfigSpec.IntValue BLOCK_TUITION_RESET_AMOUNT = BUILDER
-            .comment("How long should the cooldown of the Billiken Trading be?")
-            .defineInRange("length in seconds: ", 300, 0, Integer.MAX_VALUE);
+            .comment("How long should Tuition Block reset the trades by?")
+            .defineInRange("item length in seconds: ", 10000, 0, Integer.MAX_VALUE);
 
 
     public static final ModConfigSpec.IntValue TUITION_RESET_AMOUNT = BUILDER
-            .comment("How long should the cooldown of the Billiken Trading be?")
-            .defineInRange("length in seconds: ", 30, 0, Integer.MAX_VALUE);
+            .comment("How long should the Tuition Item reset the trades by by?")
+            .defineInRange("block length in seconds: ", 1000, 0, Integer.MAX_VALUE);
 
 
 
     public static final ModConfigSpec.IntValue LEVELS_FOR_FIRST = BUILDER
             .comment("How many levels should the first round of enchantment cost: ")
-            .defineInRange("Levels: ", 15, 0, Integer.MAX_VALUE);
+            .defineInRange("Levels for First: ", 15, 0, Integer.MAX_VALUE);
+
+
 
 
     public static final ModConfigSpec.IntValue LEVELS_FOR_SECOND = BUILDER
-            .comment("How many levels should the second round of enchantment cost: ")
-            .defineInRange("Levels: ", 20, 0, Integer.MAX_VALUE);
+            .comment("How many levels should the third round of enchantment cost: ")
+            .defineInRange("Levels for Second: ", 20, 0, Integer.MAX_VALUE);
 
 
     public static final ModConfigSpec.IntValue LEVELS_FOR_THIRD = BUILDER
             .comment("How many levels should the third round of enchantment cost: ")
-            .defineInRange("Levels: ", 30, 0, Integer.MAX_VALUE);
+            .defineInRange("Levels for Third: ", 25, 0, Integer.MAX_VALUE);
 
     public static final ModConfigSpec.IntValue BILLIKEN_TRADE_RESET = BUILDER
             .comment("How long should the cooldown of the Billiken Trading be?")
-            .defineInRange("length in seconds: ", 300, 0, Integer.MAX_VALUE);
+            .defineInRange("length in seconds: ", 10000, 0, Integer.MAX_VALUE);
 
 
     static final ModConfigSpec SPEC = BUILDER.build();

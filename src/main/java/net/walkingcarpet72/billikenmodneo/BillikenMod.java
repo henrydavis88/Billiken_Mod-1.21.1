@@ -10,7 +10,9 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.walkingcarpet72.billikenmodneo.entity.client.BillikenRenderer;
+import net.walkingcarpet72.billikenmodneo.recipe.AllBillikenRecipes;
 import net.walkingcarpet72.billikenmodneo.recipe.BillikenRecipe;
+import net.walkingcarpet72.billikenmodneo.util.ModUtils;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -57,6 +59,7 @@ public class BillikenMod {
         ModEntities.register(modEventBus);
         ModEnchantmentEffects.register(modEventBus);
 
+        ModUtils.register(modEventBus);
 
 
         // Register the item to a creative tab
@@ -98,6 +101,11 @@ public class BillikenMod {
                         ResourceLocation.fromNamespaceAndPath(BillikenMod.MOD_ID,"billiken_recipe")
                         );
 
+        public static final ResourceKey<Registry<AllBillikenRecipes>> ALL_BILLIKEN_RECIPE_REGISTRY =
+                ResourceKey.createRegistryKey(
+                        ResourceLocation.fromNamespaceAndPath(BillikenMod.MOD_ID,"billiken_crafts")
+                );
+
         @SubscribeEvent
         public static void addRegistries(DataPackRegistryEvent.NewRegistry event) {
             event.dataPackRegistry(
@@ -106,6 +114,12 @@ public class BillikenMod {
                     BillikenRecipe.BILLIKEN_RECIPE_CODEC,
                     builder -> builder.maxId(256)
 
+            );
+            event.dataPackRegistry(
+                    ALL_BILLIKEN_RECIPE_REGISTRY,
+                    AllBillikenRecipes.ALL_BILLIKEN_RECIPES_CODEC,
+                    AllBillikenRecipes.ALL_BILLIKEN_RECIPES_CODEC,
+                    builder -> builder.maxId(256)
             );
         }
 
