@@ -32,8 +32,8 @@ import net.walkingcarpet72.billikenmodneo.Config;
 import net.walkingcarpet72.billikenmodneo.blocks.ModBlocks;
 import net.walkingcarpet72.billikenmodneo.enchantment.ModEnchantments;
 import net.walkingcarpet72.billikenmodneo.item.ModItems;
-import net.walkingcarpet72.billikenmodneo.recipe.AllBillikenRecipes;
-import net.walkingcarpet72.billikenmodneo.recipe.BillikenRecipe;
+import net.walkingcarpet72.billikenmodneo.billiken_recipe.AllBillikenRecipes;
+import net.walkingcarpet72.billikenmodneo.billiken_recipe.BillikenRecipe;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 

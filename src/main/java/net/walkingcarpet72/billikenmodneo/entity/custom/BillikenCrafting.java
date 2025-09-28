@@ -1,9 +1,6 @@
 package net.walkingcarpet72.billikenmodneo.entity.custom;
 
-import com.mojang.serialization.DataResult;
-import com.mojang.serialization.JsonOps;
 import net.minecraft.world.item.Item;
-import net.walkingcarpet72.billikenmodneo.recipe.BillikenRecipe;
 
 public class BillikenCrafting {
     public Item startingItem;

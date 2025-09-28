@@ -1,4 +1,4 @@
-package net.walkingcarpet72.billikenmodneo.recipe;
+package net.walkingcarpet72.billikenmodneo.billiken_recipe;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

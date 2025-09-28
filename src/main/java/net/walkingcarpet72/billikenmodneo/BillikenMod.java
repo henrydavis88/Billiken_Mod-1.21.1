@@ -10,8 +10,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.walkingcarpet72.billikenmodneo.entity.client.BillikenRenderer;
-import net.walkingcarpet72.billikenmodneo.recipe.AllBillikenRecipes;
-import net.walkingcarpet72.billikenmodneo.recipe.BillikenRecipe;
+import net.walkingcarpet72.billikenmodneo.billiken_recipe.AllBillikenRecipes;
+import net.walkingcarpet72.billikenmodneo.billiken_recipe.BillikenRecipe;
 import net.walkingcarpet72.billikenmodneo.util.ModUtils;
 import org.slf4j.Logger;
 
